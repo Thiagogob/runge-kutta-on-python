@@ -37,7 +37,7 @@ def runge_kutta(f, x0, y0, h, n):
     return valores_x, valores_y
 
 def f(v, t):
-    return v/4 - (v/8) + 1
+    return -(v/4) + 1
 
 t0 = 0
 v0 = 8
