@@ -1,54 +1,44 @@
-import matplotlib as plt
-import numpy as np
-plt.use('agg')
+# RK-4 python
 
-def runge_kutta(f, x0, y0, h, n):
-    """
-    Implementação do método de Runge-Kutta de quarta ordem.
+# EDO
+def f(x,y):
+    return -y/4 + 1
 
-    Args:
-        f: Função que define a equação diferencial dy/dx = f(x, y).
-        x0: Valor inicial de x.
-        y0: Valor inicial de y.
-        h: Tamanho do passo.
-        n: Número de passos a serem executados.
 
-    Returns:
-        Duas listas: a primeira contém os valores de x, e a segunda contém os valores de y.
-    """
-    valores_x = [x0]
-    valores_y = [y0]
-
+# metodo de runge-kutta de 4 ordem
+def rk4(x0,y0,h,n):
+    
+    print('\n--------METODO DE RUNGE-KUTTA DE 4 ORDEM--------')
+    
+    
+    print('\n--------SOLUCAO--------')
+    print('-------------------------')    
+    print('x0\ty0\tyn')
+    print('-------------------------')
     for i in range(n):
-        x = valores_x[-1]
-        y = valores_y[-1]
+        k1 = h * (f(x0, y0))
+        k2 = h * (f((x0+h/2), (y0+k1/2)))
+        k3 = h * (f((x0+h/2), (y0+k2/2)))
+        k4 = h * (f((x0+h), (y0+k3)))
+        k = (k1+2*k2+2*k3+k4)/6
+        yn = y0 + k
+        print('%f\t%f\t%f'% (x0,y0,yn) )
+        print('-------------------------')
+        y0 = yn
+        x0 = x0+h
+    
+    print('\nAt x=%f, y=%f' %(h*n,yn))
 
-        k1 = h * f(x, y)
-        k2 = h * f(x + h/2, y + k1/2)
-        k3 = h * f(x + h/2, y + k2/2)
-        k4 = h * f(x + h, y + k3)
+# Inputs
+print('Condicoes iniciais:')
+x0 = float(input('t0 = '))
+y0 = float(input('v0 = '))
 
-        x_prox = x + h
-        y_prox = y + (k1 + 2*k2 + 2*k3 + k4) / 6
+print('Passo: ')
+h = float(input('h = '))
 
-        valores_x.append(x_prox)
-        valores_y.append(y_prox)
+print('Quantidade de iteracoes:')
+step = int(input('n = '))
 
-    return valores_x, valores_y
-
-def f(v, t):
-    return -(v/4) + 1
-
-t0 = 0
-v0 = 8
-h = 0.1
-n = 10
-
-valores_x, valores_y = runge_kutta(f, t0, v0, h, n)
-
-for x, y in zip(valores_x, valores_y):
-    print(f"x = {x}, y = {y}")
-
-
-if __name__ == "__f__":
-    f()
+# chamada rk4
+rk4(x0,y0,h,step)
