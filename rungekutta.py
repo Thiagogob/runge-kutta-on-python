@@ -27,7 +27,7 @@ def rk4(x0,y0,h,n):
         y0 = yn
         x0 = x0+h
     
-    print('\nAt x=%f, y=%f' %(h*n,yn))
+    print('\npara t=%f, v=%f' %(h*n,yn))
 
 # Inputs
 print('Condicoes iniciais:')
