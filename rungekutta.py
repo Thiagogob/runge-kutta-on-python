@@ -8,6 +8,12 @@ def v2(t,v2):
 def v1(t,v2,v1):
     return -(v1/4) + v2/4 + 1
 
+def h1(t, v1, v2):
+    return -(v1*t)/4 + (v2*t)/4 + t + 2.009608 + 0.183051       # essa soma é a altura inicial do tanque 1
+
+def h2(t, v2):
+    return -(v2*t)/4 + t + 1.055626 + 0.415892                  # essa soma é a altura inicial do tanque 2
+
 # metodo de runge-kutta de 4 ordem
 def rk4(t0,v2_0,v1_0,h,n):
     
@@ -78,8 +84,9 @@ def main():
     # chamada rk4
     valores_t, valores_v1,valores_v2 = rk4(t0,v2_0,v1_0,h,step)
 
+    plt.figure()
     # variando x(tempo) de 0 a 40
-    plt.xlim(0, 40)
+    plt.xlim(0, 80)
 
     # variando y(v) de 0 a 20
     plt.ylim(0, 20)
@@ -103,6 +110,24 @@ def main():
 
     plt.savefig("rk4.png")
 
+    plt.close()
+
+    valores_h1 = []
+    valores_h2 = []
+
+
+    with open("altura_tanque_2.txt", "w") as file:
+        file.write("ALTURA TANQUE 2\n\n")
+        for i in range(len(valores_t)):
+            file.write("t = %f\th2 = %f\n" % (valores_t[i], h2(valores_t[i], valores_v2[i])))
+            valores_h2.append(h2(valores_t[i], valores_v2[i]))
+
+    with open("altura_tanque_1.txt", "w") as file:
+        file.write("ALTURA TANQUE 1\n\n")   
+        for i in range(len(valores_t)):
+            file.write("t = %f\th1 = %f\n" % (valores_t[i], h1(valores_t[i], valores_v1[i], valores_v2[i])))
+            valores_h1.append(h1(valores_t[i], valores_v1[i], valores_v2[i]))
+
     with open("resultados_v1", "w") as file:
             file.write("RESULTADOS V1\n\n")
             for i in range(len(valores_t)):
@@ -113,7 +138,40 @@ def main():
             for i in range(len(valores_t)):
                 file.write("t = %f\tv2 = %f\n" % (valores_t[i], valores_v2[i]))
 
-    print("\nGrafico gerado com sucesso!")
+
+    plt.figure()
+
+    plt.xlim(0, 80)
+
+    plt.plot(valores_t, valores_h1)
+
+    plt.xlabel('t')
+
+    plt.ylabel('h')
+
+    plt.title('Altura do tanque 1')
+
+    plt.savefig("altura_tanque_1.png")
+
+    plt.close()
+
+    plt.figure()
+
+    plt.xlim(0, 80)
+
+    plt.plot(valores_t, valores_h2)
+
+    plt.xlabel('t')
+
+    plt.ylabel('h')
+
+    plt.title('Altura do tanque 2')
+
+    plt.savefig("altura_tanque_2.png")
+
+    plt.close()
+
+    print("\nGraficos gerados com sucesso!")
     print("Arquivo de resultados escrito com sucesso!")
 
     
