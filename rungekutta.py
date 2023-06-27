@@ -98,10 +98,10 @@ def main():
     plt.plot(valores_t, valores_v1)
 
     # legenda do grafico
-    plt.xlabel('t')
+    plt.xlabel('Tempo')
 
     # legenda do grafico
-    plt.ylabel('v')
+    plt.ylabel('Velocidade')
 
     # titulo do grafico
     plt.title('Estado de escoamento dos tanques')
@@ -145,9 +145,9 @@ def main():
 
     plt.plot(valores_t, valores_h1)
 
-    plt.xlabel('t')
+    plt.xlabel('Tempo')
 
-    plt.ylabel('h')
+    plt.ylabel('Altura')
 
     plt.title('Altura do tanque 1')
 
@@ -161,9 +161,9 @@ def main():
 
     plt.plot(valores_t, valores_h2)
 
-    plt.xlabel('t')
+    plt.xlabel('Tempo')
 
-    plt.ylabel('h')
+    plt.ylabel('Altura')
 
     plt.title('Altura do tanque 2')
 
