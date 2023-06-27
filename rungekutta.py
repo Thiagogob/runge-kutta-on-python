@@ -9,7 +9,8 @@ def v1(t,v2,v1):
     return -(v1/4) + v2/4 + 1
 
 def h1(t, v1, v2):
-    return -(v1*t)/4 + (v2*t)/4 + t + 2.009608 + 0.183051       # essa soma é a altura inicial do tanque 1
+    h_constant = 2.009608 + 0.183051 # essa soma é a altura inicial do tanque 1
+    return -(v1*t)/4 + (v2*t)/4 + t + h_constant  
 
 def h2(t, v2):
     return -(v2*t)/4 + t + 1.055626 + 0.415892                  # essa soma é a altura inicial do tanque 2
