@@ -9,11 +9,12 @@ def v1(t,v2,v1):
     return -(v1/4) + v2/4 + 1
 
 def h1(t, v1, v2):
-    h_constant = 2.009608 + 0.183051 # essa soma é a altura inicial do tanque 1
-    return -(v1*t)/4 + (v2*t)/4 + t + h_constant  
+    h1_constant = 2.009608 + 0.183051 # essa soma é a altura inicial do tanque 1
+    return -(v1*t)/4 + (v2*t)/4 + t + h1_constant  
 
 def h2(t, v2):
-    return -(v2*t)/4 + t + 1.055626 + 0.415892                  # essa soma é a altura inicial do tanque 2
+    h2_constant = 1.055626 + 0.415892 # essa soma é a altura inicial do tanque 2
+    return -(v2*t)/4 + t + h2_constant
 
 # metodo de runge-kutta de 4 ordem
 def rk4(t0,v2_0,v1_0,h,n):
