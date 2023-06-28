@@ -1,23 +1,28 @@
 import matplotlib.pyplot as plt
 import numpy as np
+
 # RK-4 python
 # EDO
-def v2(t,v2):
-    return -v2/4 + 1
+def v1(t ,v1, v2, r1, c1, c2, q_1t):
+    result = ((-v1/(r1*c1)) + (v2/(r1*c2)) + q_1t)
+    print(result)
+    return result
 
-def v1(t,v2,v1):
-    return -(v1/4) + v2/4 + 1
-
+def v2(t,v2, r1, r2,c1, c2, q_2t):
+    result = ((v2/(r1*c1)) - (1/(r2*c2) + 1/(r1*c2))*v2 + q_2t)
+    print(result)
+    return result
+ 
 def h1(t, v1, v2):
-    h1_constant = 2.009608 + 0.183051 # essa soma é a altura inicial do tanque 1
-    return -(v1*t)/4 + (v2*t)/4 + t + h1_constant  
+    h_constant = 2.009608 + 0.183051 # essa soma é a altura inicial do tanque 1
+    return -(v1*t)/4 + (v2*t)/4 + t + h_constant  
 
 def h2(t, v2):
     h2_constant = 1.055626 + 0.415892 # essa soma é a altura inicial do tanque 2
     return -(v2*t)/4 + t + h2_constant
 
 # metodo de runge-kutta de 4 ordem
-def rk4(t0,v2_0,v1_0,h,n):
+def rk4(t0, v1_0, v2_0, h, n, r1, r2, c1, c2, q_1t, q_2t):
     
 
     valores_t = [t0]
@@ -26,12 +31,12 @@ def rk4(t0,v2_0,v1_0,h,n):
 
     for i in range(n):
 
-
+        # v1, v2, r, c1, c2, q_1t
         #calculando v_1
-        k1 = (v1(t0, v2_0,v1_0))
-        k2 = (v1((t0+h/2), v2_0,(v1_0+(k1*h/2))))
-        k3 = (v1((t0+h/2), v2_0,(v1_0+(k2*h/2))))
-        k4 = (v1((t0+h), v2_0,(v1_0+k3*h)))
+        k1 = (v1(t0, v1_0, v2_0, r1, c1, c2, q_1t))
+        k2 = (v1((t0+h/2), (v1_0+(k1*h/2)), v2_0, r1, c1, c2, q_1t))
+        k3 = (v1((t0+h/2), (v1_0+(k2*h/2)), v2_0, r1, c1, c2, q_1t))
+        k4 = (v1((t0+h), (v1_0+k3*h), v2_0, r1,c1, c2, q_1t))
         k = (k1+2*k2+2*k3+k4)*(h/6)
 
         #atribuindo um novo valor para v1
@@ -39,12 +44,12 @@ def rk4(t0,v2_0,v1_0,h,n):
 
         v1_0 = v1_n
 
-
+        #t,v2, r1, r2,c1, c2, q_2t
         #calculando v_2
-        k1 = (v2(t0, v2_0))
-        k2 = (v2((t0+h/2), (v2_0+(k1*h/2))))
-        k3 = (v2((t0+h/2), (v2_0+(k2*h/2))))
-        k4 = (v2((t0+h), (v2_0+(k3*h))))
+        k1 = (v2(t0, v2_0, r1, r2,c1, c2, q_2t))
+        k2 = (v2((t0+h/2), (v2_0+(k1*h/2)), r1, r2,c1, c2, q_2t))
+        k3 = (v2((t0+h/2), (v2_0+(k2*h/2)), r1, r2,c1, c2, q_2t))
+        k4 = (v2((t0+h), (v2_0+(k3*h)), r1, r2,c1, c2, q_2t))
         k = (k1+2*k2+2*k3+k4)*(h/6)
 
         #atribuindo um novo valor para v2
@@ -69,10 +74,18 @@ def main():
 
     
     print("t0=0\nv1_0=12\nv2_0=8\n\n")
-    print('Digite as condicoes iniciais:')
+    print('Digite as condições iniciais: ')
     t0 = float(input('t0 = '))
     v1_0 = float(input('v1_0 = '))
     v2_0 = float(input('v2_0 = '))
+    r1 = float(input('r1 = '))
+    r2 = float(input('r2 = '))
+    c1 = float(input('c1 = '))
+    c2 = float(input('c2 = '))
+    q_1t = float(input('q_1t = '))
+    q_2t = float(input('q_2t = '))
+
+    
 
     print('\nPasso: ')
     print("Nesse caso h=0.1")
@@ -84,7 +97,7 @@ def main():
     step = int(input('n = '))
 
     # chamada rk4
-    valores_t, valores_v1,valores_v2 = rk4(t0,v2_0,v1_0,h,step)
+    valores_t, valores_v1,valores_v2 = rk4(t0, v1_0, v2_0, h, step, r1, r2, c1, c2, q_1t, q_2t)
 
     plt.figure()
     # variando x(tempo) de 0 a 40
