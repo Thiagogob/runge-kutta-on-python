@@ -126,19 +126,6 @@ def main():
     valores_h1 = []
     valores_h2 = []
 
-
-    with open("altura_tanque_2.txt", "w") as file:
-        file.write("ALTURA TANQUE 2\n\n")
-        for i in range(len(valores_t)):
-            file.write("t = %f\th2 = %f\n" % (valores_t[i], h2(valores_t[i], valores_v2[i])))
-            valores_h2.append(h2(valores_t[i], valores_v2[i]))
-
-    with open("altura_tanque_1.txt", "w") as file:
-        file.write("ALTURA TANQUE 1\n\n")   
-        for i in range(len(valores_t)):
-            file.write("t = %f\th1 = %f\n" % (valores_t[i], h1(valores_t[i], valores_v1[i], valores_v2[i])))
-            valores_h1.append(h1(valores_t[i], valores_v1[i], valores_v2[i]))
-
     with open("resultados_v1", "w") as file:
             file.write("RESULTADOS V1\n\n")
             for i in range(len(valores_t)):
@@ -148,39 +135,6 @@ def main():
             file.write("RESULTADOS V2\n\n")
             for i in range(len(valores_t)):
                 file.write("t = %f\tv2 = %f\n" % (valores_t[i], valores_v2[i]))
-
-
-    plt.figure()
-
-    plt.xlim(0, 80)
-
-    plt.plot(valores_t, valores_h1)
-
-    plt.xlabel('Tempo')
-
-    plt.ylabel('Altura')
-
-    plt.title('Altura do tanque 1')
-
-    plt.savefig("altura_tanque_1.png")
-
-    plt.close()
-
-    plt.figure()
-
-    plt.xlim(0, 80)
-
-    plt.plot(valores_t, valores_h2)
-
-    plt.xlabel('Tempo')
-
-    plt.ylabel('Altura')
-
-    plt.title('Altura do tanque 2')
-
-    plt.savefig("altura_tanque_2.png")
-
-    plt.close()
 
     print("\nGraficos gerados com sucesso!")
     print("Arquivo de resultados escrito com sucesso!")
