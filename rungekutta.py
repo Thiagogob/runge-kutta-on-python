@@ -5,12 +5,10 @@ import numpy as np
 # EDO
 def v1(t ,v1, v2, r1, c1, c2, q_1t):
     result = ((-v1/(r1*c1)) + (v2/(r1*c2)) + q_1t)
-    print(result)
     return result
 
 def v2(t,v2, r1, r2,c1, c2, q_2t):
     result = ((v2/(r1*c1)) - (1/(r2*c2) + 1/(r1*c2))*v2 + q_2t)
-    print(result)
     return result
  
 def h1(t, v1, v2):
@@ -23,8 +21,6 @@ def h2(t, v2):
 
 # metodo de runge-kutta de 4 ordem
 def rk4(t0, v1_0, v2_0, h, n, r1, r2, c1, c2, q_1t, q_2t):
-    
-
     valores_t = [t0]
     valores_v2 = [v2_0]
     valores_v1 = [v1_0]
@@ -116,7 +112,7 @@ def main():
     plt.xlabel('Tempo')
 
     # legenda do grafico
-    plt.ylabel('Velocidade')
+    plt.ylabel('Tensão')
 
     # titulo do grafico
     plt.title('Estado de escoamento dos tanques')
