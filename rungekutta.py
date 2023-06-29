@@ -115,7 +115,7 @@ def main():
     plt.ylabel('Tensão')
 
     # titulo do grafico
-    plt.title('Estado de escoamento dos tanques')
+    plt.title('Taxa variação de tensão dos tanques')
 
     plt.grid(True)
 
